@@ -79,7 +79,7 @@ Section "Install"
   ; Create Startup Shortcut for Auto-launch on Boot
   DetailPrint "Setting up auto-launch on startup..."
   CreateDirectory "$APPDATA\Microsoft\Windows\Start Menu\Programs\Startup"
-  CreateShortCut "$APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\SpaceToggle.lnk" "$INSTDIR\AutoHotkey64.exe" '"$INSTDIR\SpaceToggle.ahk"' "" "" SW_MINIMIZE
+  CreateShortCut "$APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\SpaceToggle.lnk" "$INSTDIR\AutoHotkey64.exe" '"$INSTDIR\SpaceToggle.ahk"'
   DetailPrint "Auto-launch configured"
   
   ; Save install directory to registry

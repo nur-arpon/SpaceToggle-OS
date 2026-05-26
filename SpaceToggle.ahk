@@ -2,9 +2,10 @@
 SetTitleMatchMode 2
 
 ; =========================================================================
-; SpaceToggle OS - Universal App Launcher
+; SpaceToggle OS - Universal App Launcher with Web Fallbacks
 ; Hold Spacebar + Press a letter to instantly toggle applications.
 ; Works regardless of where apps are installed!
+; If app not found, opens web version in default browser
 ; =========================================================================
 
 ; Helper function to find and launch app by executable name
@@ -92,11 +93,28 @@ SearchPath(exeName) {
     return ""
 }
 
+; Helper function to open URL in default browser
+OpenInBrowser(url) {
+    try {
+        Run(url)
+    } catch {
+        ; Fallback to try Brave
+        try {
+            Run("brave.exe " url)
+        } catch {
+            ; Fallback to try Chrome
+            try {
+                Run("chrome.exe " url)
+            }
+        }
+    }
+}
+
 #HotIf GetKeyState("Space", "P")
 
-; Space + N ➔ Notepad
-n:: {
-    LaunchApp("notepad.exe")
+; Space + A ➔ Google Gemini (AI)
+a:: {
+    OpenInBrowser("https://gemini.google.com")
 }
 
 ; Space + B ➔ Brave Browser
@@ -123,19 +141,7 @@ c:: {
     }
 }
 
-; Space + S ➔ Spotify
-s:: {
-    if WinExist("ahk_exe Spotify.exe") {
-        if WinActive("ahk_exe Spotify.exe")
-            WinMinimize
-        else
-            WinActivate
-    } else {
-        LaunchApp("Spotify.exe", "spotify:")
-    }
-}
-
-; Space + D ➔ Discord
+; Space + D ➔ Discord (App) / Discord Web
 d:: {
     if WinExist("ahk_exe Discord.exe") {
         if WinActive("ahk_exe Discord.exe")
@@ -143,26 +149,109 @@ d:: {
         else
             WinActivate
     } else {
-        LaunchApp("Discord.exe", "discord:")
+        ; Try desktop app first
+        result := SearchPath("Discord.exe")
+        if (result != "") {
+            Run(result)
+        } else {
+            ; Fallback to web version
+            OpenInBrowser("https://discord.com/app")
+        }
     }
 }
 
-; Space + Y ➔ YouTube (Default Browser)
-y:: {
-    LaunchApp("brave.exe")
-    sleep 1000
-    Run("https://www.youtube.com")
+; Space + E ➔ Google Sheets (Excel Version)
+e:: {
+    OpenInBrowser("https://sheets.google.com")
 }
 
-; Space + W ➔ WhatsApp
-w:: {
-    if WinExist("ahk_exe WhatsApp.exe") {
-        if WinActive("ahk_exe WhatsApp.exe")
+; Space + F ➔ File Explorer
+f:: {
+    if WinExist("ahk_exe explorer.exe") {
+        if WinActive("ahk_exe explorer.exe")
             WinMinimize
         else
             WinActivate
     } else {
-        LaunchApp("WhatsApp.exe")
+        Run("explorer.exe")
+    }
+}
+
+; Space + G ➔ Gmail
+g:: {
+    OpenInBrowser("https://mail.google.com")
+}
+
+; Space + H ➔ GitHub (Web)
+h:: {
+    OpenInBrowser("https://www.github.com")
+}
+
+; Space + I ➔ Instagram (Web)
+i:: {
+    OpenInBrowser("https://www.instagram.com")
+}
+
+; Space + J ➔ Google Docs
+j:: {
+    OpenInBrowser("https://docs.google.com")
+}
+
+; Space + K ➔ Google Calendar
+k:: {
+    OpenInBrowser("https://calendar.google.com")
+}
+
+; Space + L ➔ LinkedIn (Web)
+l:: {
+    OpenInBrowser("https://www.linkedin.com")
+}
+
+; Space + M ➔ Cinema OS (Movie Site)
+m:: {
+    OpenInBrowser("https://cinemaos.live/")
+}
+
+; Space + N ➔ Google Keep (Notes)
+n:: {
+    OpenInBrowser("https://keep.google.com")
+}
+
+; Space + O ➔ Google Drive
+o:: {
+    OpenInBrowser("https://drive.google.com")
+}
+
+; Space + P ➔ Google Photos
+p:: {
+    OpenInBrowser("https://photos.google.com")
+}
+
+; Space + Q ➔ Google Scholar
+q:: {
+    OpenInBrowser("https://scholar.google.com")
+}
+
+; Space + R ➔ Google Search
+r:: {
+    OpenInBrowser("https://www.google.com")
+}
+
+; Space + S ➔ Spotify (App) / Spotify Web
+s:: {
+    if WinExist("ahk_exe Spotify.exe") {
+        if WinActive("ahk_exe Spotify.exe")
+            WinMinimize
+        else
+            WinActivate
+    } else {
+        result := SearchPath("Spotify.exe")
+        if (result != "") {
+            Run(result)
+        } else {
+            ; Fallback to web version
+            OpenInBrowser("https://open.spotify.com")
+        }
     }
 }
 
@@ -183,34 +272,59 @@ t:: {
     }
 }
 
-; Space + F ➔ File Explorer
-f:: {
-    if WinExist("ahk_exe explorer.exe") {
-        if WinActive("ahk_exe explorer.exe")
+; Space + U ➔ Google Classroom
+u:: {
+    OpenInBrowser("https://classroom.google.com")
+}
+
+; Space + V ➔ Google Video Search
+v:: {
+    OpenInBrowser("https://www.google.com/videohp")
+}
+
+; Space + W ➔ WhatsApp (App) / WhatsApp Web
+w:: {
+    if WinExist("ahk_exe WhatsApp.exe") {
+        if WinActive("ahk_exe WhatsApp.exe")
             WinMinimize
         else
             WinActivate
     } else {
-        Run("explorer.exe")
+        result := SearchPath("WhatsApp.exe")
+        if (result != "") {
+            Run(result)
+        } else {
+            ; Fallback to web version
+            OpenInBrowser("https://web.whatsapp.com")
+        }
     }
 }
 
-; Space + G ➔ Google Gemini (Web)
-g:: {
-    LaunchApp("brave.exe")
-    sleep 1000
-    Run("https://gemini.google.com")
+; Space + X ➔ Twitter / X (Web)
+x:: {
+    OpenInBrowser("https://www.x.com")
 }
 
-; Space + E ➔ Calculator
-e:: {
-    if WinExist("Calculator") {
-        if WinActive("Calculator")
+; Space + Y ➔ YouTube (Web)
+y:: {
+    OpenInBrowser("https://www.youtube.com")
+}
+
+; Space + Z ➔ Zoom (App) / Zoom Web
+z:: {
+    if WinExist("ahk_exe Zoom.exe") {
+        if WinActive("ahk_exe Zoom.exe")
             WinMinimize
         else
             WinActivate
     } else {
-        Run("calc.exe")
+        result := SearchPath("Zoom.exe")
+        if (result != "") {
+            Run(result)
+        } else {
+            ; Fallback to web version
+            OpenInBrowser("https://zoom.us")
+        }
     }
 }
 

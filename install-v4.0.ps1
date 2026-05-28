@@ -1,5 +1,5 @@
 # ==============================================================================
-# SpaceToggle OS (Universal Setup Script - V4.0.5 Custom Combination Core)
+# SpaceToggle OS (Universal Setup Script - V4.0.4 Precision Core)
 # ==============================================================================
 
 Write-Host "Cleaning up old V4 instances..." -ForegroundColor Cyan
@@ -21,14 +21,14 @@ if (!(Test-Path $ahkExe)) {
 }
 
 Clear-Host
-Write-Host @
+Write-Host @"
 =========================================================================================================
  ███████  ██████   █████  ██████ ███████     ████████  ██████  ██████   ██████   ██      ███████ 
 ██        ██   ██ ██   ██ ██     ██             ██    ██    ██ ██       ██       ██      ██      
  ███████  ██████  ███████ ██     █████          ██    ██    ██ ██  ███  ██  ███  ██      █████   
       ██  ██      ██   ██ ██     ██             ██    ██    ██ ██   ██  ██   ██  ██      ██      
  ███████  ██      ██   ██  ██████ ███████       ██     ██████   ██████   ██████  ███████ ███████ 
-                                   V4.0.5 CUSTOM MATRIX
+                                   V4.0.4 PRECISION ENGINE
 =========================================================================================================
 "@ -ForegroundColor Yellow
 
@@ -42,9 +42,12 @@ $choices = [System.Management.Automation.Host.ChoiceDescription[]] @(
 $result = $Host.UI.PromptForChoice($caption, $message, $choices, 0)
 
 # --- CORE ENGINE LITERAL BLOCK ---
-$coreEngine = @
+$coreEngine = @'
 #Requires AutoHotkey v2.0
 SetTitleMatchMode 2
+
+; --- GLOBAL STATE MANAGEMENT ---
+Global HotkeyPressed := false
 
 ; --- PROTOCOL C: ABSOLUTE FAIL-SAFE ERROR GUARDING ---
 OnError(LogFault)
@@ -131,6 +134,8 @@ BootScanner() {
 BootScanner()
 
 SmartLaunch(exeTarget, runCommand, webFallback := "") {
+    Global HotkeyPressed
+    HotkeyPressed := true
     resolved := PathCache.Has(exeTarget) ? PathCache[exeTarget] : ""
     actualExe := exeTarget
     if (resolved == "") {
@@ -140,6 +145,7 @@ SmartLaunch(exeTarget, runCommand, webFallback := "") {
         }
     }
     
+    ; Target mapping criteria to catch visible windows vs background host application frames
     targetIdent := "ahk_exe " actualExe
     if (exeTarget = "WhatsApp.exe") {
         if WinExist("WhatsApp ahk_class ApplicationFrameWindow") {
@@ -183,6 +189,8 @@ SmartLaunch(exeTarget, runCommand, webFallback := "") {
 }
 
 OpenInBrowser(url) {
+    Global HotkeyPressed
+    HotkeyPressed := true
     bravePath := PathCache.Has("brave.exe") ? PathCache["brave.exe"] : ""
     chromePath := PathCache.Has("chrome.exe") ? PathCache["chrome.exe"] : ""
     try {
@@ -199,6 +207,8 @@ OpenInBrowser(url) {
 }
 
 ToggleExplorer() {
+    Global HotkeyPressed
+    HotkeyPressed := true
     if WinExist("ahk_class CabinetWClass") {
         if WinActive("ahk_class CabinetWClass") {
             WinMinimize("ahk_class CabinetWClass")
@@ -209,105 +219,115 @@ ToggleExplorer() {
         Run("explorer.exe")
     }
 }
-@
+
+#HotIf GetKeyState("Space", "P")
+'@
 
 # --- MODULAR PROFILE BLOCKS ---
 $profileBlock = if ($result -eq 0) {
-@
+@'
 ; --- BUILD LAYER CONFIGURATION: FOUNDERS ---
-Space & b::SmartLaunch("brave.exe", "brave.exe")
-Space & c::SmartLaunch("chrome.exe", "chrome.exe")
-Space & d::SmartLaunch("Discord.exe", "discord://", "https://discord.com/app")
-Space & s::SmartLaunch("Spotify.exe", "spotify:", "https://open.spotify.com")
-Space & t::SmartLaunch("WindowsTerminal.exe", "wt.exe")
-Space & w::SmartLaunch("WhatsApp.exe", "whatsapp://", "https://web.whatsapp.com")
-Space & z::SmartLaunch("Zoom.exe", "zoommtg://", "https://zoom.us")
-Space & f::ToggleExplorer()
-Space & a::OpenInBrowser("https://gemini.google.com")
-Space & e::OpenInBrowser("https://sheets.google.com")
-Space & g::OpenInBrowser("https://mail.google.com")
-Space & h::OpenInBrowser("https://www.github.com")
-Space & i::OpenInBrowser("https://www.instagram.com")
-Space & j::OpenInBrowser("https://docs.google.com")
-Space & k::OpenInBrowser("https://calendar.google.com")
-Space & l::OpenInBrowser("https://www.linkedin.com")
-Space & m::OpenInBrowser("https://cinemaos.live/")
-Space & n::OpenInBrowser("https://keep.google.com")
-Space & o::SmartLaunch("obs64.exe", "obs")
-Space & p::OpenInBrowser("https://photos.google.com")
-Space & q::OpenInBrowser("https://notebooklm.google.com")
-Space & r::OpenInBrowser("https://www.reddit.com")
-Space & u::SmartLaunch("uTorrent.exe", "uTorrent.exe")
-Space & v::SmartLaunch("vlc.exe", "vlc.exe")
-Space & x::OpenInBrowser("https://www.x.com")
-Space & y::OpenInBrowser("https://www.youtube.com")
-@
+b::SmartLaunch("brave.exe", "brave.exe")
+c::SmartLaunch("chrome.exe", "chrome.exe")
+d::SmartLaunch("Discord.exe", "discord://", "https://discord.com/app")
+s::SmartLaunch("Spotify.exe", "spotify:", "https://open.spotify.com")
+t::SmartLaunch("WindowsTerminal.exe", "wt.exe")
+w::SmartLaunch("WhatsApp.exe", "whatsapp://", "https://web.whatsapp.com")
+z::SmartLaunch("Zoom.exe", "zoommtg://", "https://zoom.us")
+f::ToggleExplorer()
+a::OpenInBrowser("https://gemini.google.com")
+e::OpenInBrowser("https://sheets.google.com")
+g::OpenInBrowser("https://mail.google.com")
+h::OpenInBrowser("https://www.github.com")
+i::OpenInBrowser("https://www.instagram.com")
+j::OpenInBrowser("https://docs.google.com")
+k::OpenInBrowser("https://calendar.google.com")
+l::OpenInBrowser("https://www.linkedin.com")
+m::OpenInBrowser("https://cinemaos.live/")
+n::OpenInBrowser("https://keep.google.com")
+o::SmartLaunch("obs64.exe", "obs")
+p::OpenInBrowser("https://photos.google.com")
+q::OpenInBrowser("https://notebooklm.google.com")
+r::OpenInBrowser("https://www.reddit.com")
+u::SmartLaunch("uTorrent.exe", "uTorrent.exe")
+v::SmartLaunch("vlc.exe", "vlc.exe")
+x::OpenInBrowser("https://www.x.com")
+y::OpenInBrowser("https://www.youtube.com")
+'@
 } elseif ($result -eq 1) {
-@
+@'
 ; --- BUILD LAYER CONFIGURATION: GAMERS (MORPHIC DUAL-HYBRID SUB-SYSTEM) ---
-Space & a::(PathCache["r5apex.exe"] != "") ? SmartLaunch("r5apex.exe", "r5apex.exe") : OpenInBrowser("https://gemini.google.com")
-Space & b::SmartLaunch("brave.exe", "brave.exe")
-Space & c::(PathCache["cs2.exe"] != "") ? SmartLaunch("cs2.exe", "cs2.exe") : SmartLaunch("chrome.exe", "chrome.exe")
-Space & d::SmartLaunch("Discord.exe", "discord://", "https://discord.com/app")
-Space & e::(PathCache["EpicGamesLauncher.exe"] != "") ? SmartLaunch("EpicGamesLauncher.exe", "EpicGamesLauncher.exe") : OpenInBrowser("https://sheets.google.com")
-Space & f::(PathCache["FortniteClient-Win64-Shipping.exe"] != "") ? SmartLaunch("FortniteClient-Win64-Shipping.exe", "FortniteClient-Win64-Shipping.exe") : ToggleExplorer()
-Space & g::OpenInBrowser("https://mail.google.com")
-Space & h::OpenInBrowser("https://www.github.com")
-Space & i::OpenInBrowser("https://www.instagram.com")
-Space & j::OpenInBrowser("https://docs.google.com")
-Space & k::OpenInBrowser("https://calendar.google.com")
-Space & l::(PathCache["LeagueClient.exe"] != "") ? SmartLaunch("LeagueClient.exe", "LeagueClient.exe") : OpenInBrowser("https://www.linkedin.com")
-Space & m::OpenInBrowser("https://cinemaos.live/")
-Space & n::(PathCache["Vortex.exe"] != "") ? SmartLaunch("Vortex.exe", "Vortex.exe") : OpenInBrowser("https://keep.google.com")
-Space & o::SmartLaunch("obs64.exe", "obs")
-Space & p::(PathCache["Palworld-Win64-Shipping.exe"] != "") ? SmartLaunch("Palworld-Win64-Shipping.exe", "Palworld-Win64-Shipping.exe") : OpenInBrowser("https://photos.google.com")
-Space & q::OpenInBrowser("https://notebooklm.google.com")
-Space & r::(PathCache["RiotClientServices.exe"] != "") ? SmartLaunch("RiotClientServices.exe", "RiotClientServices.exe") : OpenInBrowser("https://www.reddit.com")
-Space & s::(PathCache["steam.exe"] != "") ? SmartLaunch("steam.exe", "steam.exe") : SmartLaunch("Spotify.exe", "spotify:", "https://open.spotify.com")
-Space & t::OpenInBrowser("https://www.twitch.tv")
-Space & u::SmartLaunch("uTorrent.exe", "uTorrent.exe")
-Space & v::(PathCache["RiotClientServices.exe"] != "") ? SmartLaunch("RiotClientServices.exe", "RiotClientServices.exe --launch-product=valorant --launch-patchline=live") : SmartLaunch("vlc.exe", "vlc.exe")
-Space & w::SmartLaunch("WhatsApp.exe", "whatsapp://", "https://web.whatsapp.com")
-Space & x::Run("xbox:")
-Space & y::OpenInBrowser("https://www.youtube.com/gaming")
-@
+a::(PathCache["r5apex.exe"] != "") ? SmartLaunch("r5apex.exe", "r5apex.exe") : OpenInBrowser("https://gemini.google.com")
+b::SmartLaunch("brave.exe", "brave.exe")
+c::(PathCache["cs2.exe"] != "") ? SmartLaunch("cs2.exe", "cs2.exe") : SmartLaunch("chrome.exe", "chrome.exe")
+d::SmartLaunch("Discord.exe", "discord://", "https://discord.com/app")
+e::(PathCache["EpicGamesLauncher.exe"] != "") ? SmartLaunch("EpicGamesLauncher.exe", "EpicGamesLauncher.exe") : OpenInBrowser("https://sheets.google.com")
+f::(PathCache["FortniteClient-Win64-Shipping.exe"] != "") ? SmartLaunch("FortniteClient-Win64-Shipping.exe", "FortniteClient-Win64-Shipping.exe") : ToggleExplorer()
+g::OpenInBrowser("https://mail.google.com")
+h::OpenInBrowser("https://www.github.com")
+i::OpenInBrowser("https://www.instagram.com")
+j::OpenInBrowser("https://docs.google.com")
+k::OpenInBrowser("https://calendar.google.com")
+l::(PathCache["LeagueClient.exe"] != "") ? SmartLaunch("LeagueClient.exe", "LeagueClient.exe") : OpenInBrowser("https://www.linkedin.com")
+m::OpenInBrowser("https://cinemaos.live/")
+n::(PathCache["Vortex.exe"] != "") ? SmartLaunch("Vortex.exe", "Vortex.exe") : OpenInBrowser("https://keep.google.com")
+o::SmartLaunch("obs64.exe", "obs")
+p::(PathCache["Palworld-Win64-Shipping.exe"] != "") ? SmartLaunch("Palworld-Win64-Shipping.exe", "Palworld-Win64-Shipping.exe") : OpenInBrowser("https://photos.google.com")
+q::OpenInBrowser("https://notebooklm.google.com")
+r::(PathCache["RiotClientServices.exe"] != "") ? SmartLaunch("RiotClientServices.exe", "RiotClientServices.exe") : OpenInBrowser("https://www.reddit.com")
+s::(PathCache["steam.exe"] != "") ? SmartLaunch("steam.exe", "steam.exe") : SmartLaunch("Spotify.exe", "spotify:", "https://open.spotify.com")
+t::OpenInBrowser("https://www.twitch.tv")
+u::SmartLaunch("uTorrent.exe", "uTorrent.exe")
+v::(PathCache["RiotClientServices.exe"] != "") ? SmartLaunch("RiotClientServices.exe", "RiotClientServices.exe --launch-product=valorant --launch-patchline=live") : SmartLaunch("vlc.exe", "vlc.exe")
+w::SmartLaunch("WhatsApp.exe", "whatsapp://", "https://web.whatsapp.com")
+x::Run("xbox:")
+y::OpenInBrowser("https://www.youtube.com/gaming")
+'@
 } else {
-@
+@'
 ; --- BUILD LAYER CONFIGURATION: PROFESSIONALS ---
-Space & a::SmartLaunch("Acrobat.exe", "Acrobat.exe")
-Space & b::SmartLaunch("brave.exe", "brave.exe")
-Space & c::OpenInBrowser("https://calendar.google.com")
-Space & d::OpenInBrowser("https://www.dropbox.com")
-Space & e::SmartLaunch("excel.exe", "excel.exe")
-Space & f::ToggleExplorer()
-Space & g::OpenInBrowser("https://mail.google.com")
-Space & h::OpenInBrowser("https://www.hubspot.com")
+a::SmartLaunch("Acrobat.exe", "Acrobat.exe")
+b::SmartLaunch("brave.exe", "brave.exe")
+c::OpenInBrowser("https://calendar.google.com")
+d::OpenInBrowser("https://www.dropbox.com")
+e::SmartLaunch("excel.exe", "excel.exe")
+f::ToggleExplorer()
+g::OpenInBrowser("https://mail.google.com")
+h::OpenInBrowser("https://www.hubspot.com")
 i::OpenInBrowser("https://www.intercom.com")
-Space & j::OpenInBrowser("https://www.atlassian.com/software/jira")
-Space & k::OpenInBrowser("https://calendar.google.com")
-Space & l::OpenInBrowser("https://www.linkedin.com")
-Space & m::OpenInBrowser("https://cinemaos.live/")
-Space & n::OpenInBrowser("https://www.notion.so")
-Space & o::SmartLaunch("outlook.exe", "outlook.exe")
-Space & p::SmartLaunch("powerpnt.exe", "powerpnt.exe")
-Space & q::OpenInBrowser("https://notebooklm.google.com")
-Space & r::Run("mstsc.exe")
-Space & s::SmartLaunch("slack.exe", "slack.exe")
-Space & t::SmartLaunch("telegram.exe", "telegram.exe")
-Space & u::OpenInBrowser("https://drive.google.com")
-Space & v::Run("vmware.exe")
-Space & w::OpenInBrowser("https://web.whatsapp.com")
-Space & x::OpenInBrowser("https://www.x.com")
-Space & y::OpenInBrowser("https://www.youtube.com")
-@
+j::OpenInBrowser("https://www.atlassian.com/software/jira")
+k::OpenInBrowser("https://calendar.google.com")
+l::OpenInBrowser("https://www.linkedin.com")
+m::OpenInBrowser("https://cinemaos.live/")
+n::OpenInBrowser("https://www.notion.so")
+o::SmartLaunch("outlook.exe", "outlook.exe")
+p::SmartLaunch("powerpnt.exe", "powerpnt.exe")
+q::OpenInBrowser("https://notebooklm.google.com")
+r::Run("mstsc.exe")
+s::SmartLaunch("slack.exe", "slack.exe")
+t::SmartLaunch("telegram.exe", "telegram.exe")
+u::OpenInBrowser("https://drive.google.com")
+v::Run("vmware.exe")
+w::OpenInBrowser("https://web.whatsapp.com")
+x::OpenInBrowser("https://www.x.com")
+y::OpenInBrowser("https://www.youtube.com")
+'@
 }
 
-$footerBlock = @
-; --- STABLE EXPLICIT SPACEBAR EVENT PASS-THROUGH MATRIX ---
-Space:: {
-    Send("{Space}")
+$footerBlock = @'
+#HotIf
+
+; --- PRECISION PASS-THROUGH NATIVE TRANSCEIVER HOOK ---
+~*Space:: {
+    Global HotkeyPressed := false
 }
-@
+~*Space up:: {
+    Global HotkeyPressed
+    if (HotkeyPressed) {
+        Send("{Blind}{BS}")
+    }
+}
+'@
 
 # --- ATOMIC DISK WRITE ---
 $finalScriptContent = -join ($coreEngine, "`n", $profileBlock, "`n", $footerBlock)
@@ -323,6 +343,6 @@ $Shortcut.WorkingDirectory = $installDir
 $Shortcut.IconLocation = "`"$ahkExe`", 0"
 $Shortcut.Save()
 
-Write-Host "Starting SpaceToggle OS V4.0.5..." -ForegroundColor Yellow
+Write-Host "Starting SpaceToggle OS V4.0.4..." -ForegroundColor Yellow
 Start-Process -FilePath $ahkExe -ArgumentList "`"$ahkScript`""
-Write-Host "SUCCESS! SpaceToggle OS V4.0.5 Precision Custom Core Engine is active." -ForegroundColor Green
+Write-Host "SUCCESS! SpaceToggle OS V4.0.4 Precision Engine is active." -ForegroundColor Green

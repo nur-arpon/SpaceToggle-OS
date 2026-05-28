@@ -1,5 +1,5 @@
 # ==============================================================================
-# SpaceToggle OS (Universal Setup Script - V4.0.3 Adaptive Multi-Profile Core)
+# SpaceToggle OS (Universal Setup Script - V4.0.4 Precision Core)
 # ==============================================================================
 
 Write-Host "Cleaning up old V4 instances..." -ForegroundColor Cyan
@@ -28,7 +28,7 @@ Write-Host @"
  ███████  ██████  ███████ ██     █████          ██    ██    ██ ██  ███  ██  ███  ██      █████   
       ██  ██      ██   ██ ██     ██             ██    ██    ██ ██   ██  ██   ██  ██      ██      
  ███████  ██      ██   ██  ██████ ███████       ██     ██████   ██████   ██████  ███████ ███████ 
-                                   V4.0.3 ADAPTIVE ENGINE
+                                   V4.0.4 PRECISION ENGINE
 =========================================================================================================
 "@ -ForegroundColor Yellow
 
@@ -45,6 +45,9 @@ $result = $Host.UI.PromptForChoice($caption, $message, $choices, 0)
 $coreEngine = @'
 #Requires AutoHotkey v2.0
 SetTitleMatchMode 2
+
+; --- GLOBAL STATE MANAGEMENT ---
+Global HotkeyPressed := false
 
 ; --- PROTOCOL C: ABSOLUTE FAIL-SAFE ERROR GUARDING ---
 OnError(LogFault)
@@ -131,6 +134,8 @@ BootScanner() {
 BootScanner()
 
 SmartLaunch(exeTarget, runCommand, webFallback := "") {
+    Global HotkeyPressed
+    HotkeyPressed := true
     resolved := PathCache.Has(exeTarget) ? PathCache[exeTarget] : ""
     actualExe := exeTarget
     if (resolved == "") {
@@ -140,16 +145,17 @@ SmartLaunch(exeTarget, runCommand, webFallback := "") {
         }
     }
     
-    ; Robust multi-platform window assessment mapping
-    isWhatsApp := (exeTarget = "WhatsApp.exe")
-    hasTargetWindow := WinExist("ahk_exe " actualExe) || (isWhatsApp && WinExist("WhatsApp"))
-    
-    if (actualExe != "" && hasTargetWindow) {
-        targetIdent := "ahk_exe " actualExe
-        if (isWhatsApp && !WinExist(targetIdent) && WinExist("WhatsApp")) {
+    ; Target mapping criteria to catch visible windows vs background host application frames
+    targetIdent := "ahk_exe " actualExe
+    if (exeTarget = "WhatsApp.exe") {
+        if WinExist("WhatsApp ahk_class ApplicationFrameWindow") {
+            targetIdent := "WhatsApp ahk_class ApplicationFrameWindow"
+        } else if WinExist("WhatsApp") {
             targetIdent := "WhatsApp"
         }
-        
+    }
+    
+    if (actualExe != "" && WinExist(targetIdent)) {
         if WinActive(targetIdent) {
             WinMinimize(targetIdent)
         } else {
@@ -183,6 +189,8 @@ SmartLaunch(exeTarget, runCommand, webFallback := "") {
 }
 
 OpenInBrowser(url) {
+    Global HotkeyPressed
+    HotkeyPressed := true
     bravePath := PathCache.Has("brave.exe") ? PathCache["brave.exe"] : ""
     chromePath := PathCache.Has("chrome.exe") ? PathCache["chrome.exe"] : ""
     try {
@@ -199,6 +207,8 @@ OpenInBrowser(url) {
 }
 
 ToggleExplorer() {
+    Global HotkeyPressed
+    HotkeyPressed := true
     if WinExist("ahk_class CabinetWClass") {
         if WinActive("ahk_class CabinetWClass") {
             WinMinimize("ahk_class CabinetWClass")
@@ -307,13 +317,14 @@ y::OpenInBrowser("https://www.youtube.com")
 $footerBlock = @'
 #HotIf
 
-; --- UPGRADED LAG-FREE TRANSCEIVER HOOK ---
-*Space:: {
-    ; Suppress default down event tracking to prioritize modifiers instantly
+; --- PRECISION PASS-THROUGH NATIVE TRANSCEIVER HOOK ---
+~*Space:: {
+    Global HotkeyPressed := false
 }
-*Space up:: {
-    if (A_PriorKey == "Space") {
-        Send("{Space}")
+~*Space up:: {
+    Global HotkeyPressed
+    if (HotkeyPressed) {
+        Send("{Blind}{BS}")
     }
 }
 '@
@@ -332,6 +343,6 @@ $Shortcut.WorkingDirectory = $installDir
 $Shortcut.IconLocation = "`"$ahkExe`", 0"
 $Shortcut.Save()
 
-Write-Host "Starting SpaceToggle OS V4.0.3..." -ForegroundColor Yellow
+Write-Host "Starting SpaceToggle OS V4.0.4..." -ForegroundColor Yellow
 Start-Process -FilePath $ahkExe -ArgumentList "`"$ahkScript`""
-Write-Host "SUCCESS! SpaceToggle OS V4.0.3 Adaptive Engine is active." -ForegroundColor Green
+Write-Host "SUCCESS! SpaceToggle OS V4.0.4 Precision Engine is active." -ForegroundColor Green

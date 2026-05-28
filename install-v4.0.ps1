@@ -324,5 +324,6 @@ $Shortcut.IconLocation = "`"" + $ahkExe + "`", 0"
 $Shortcut.Save()
 
 Write-Host "Starting SpaceToggle OS V4.0.2..." -ForegroundColor Yellow
-Start-Process -FilePath $ahkExe -ArgumentList "`"" + $ahkScript + "`""
+Start-Process -FilePath $ahkExe -ArgumentList "`"$ahkScript`"""
 Write-Host "SUCCESS! SpaceToggle OS V4.0.2 Adaptive Engine is active." -ForegroundColor Green
+

@@ -1,5 +1,5 @@
 # ==============================================================================
-# SpaceToggle OS (Universal Setup Script - V4.0.2 Adaptive Multi-Profile Core)
+# SpaceToggle OS (Universal Setup Script - V4.0.3 Adaptive Multi-Profile Core)
 # ==============================================================================
 
 Write-Host "Cleaning up old V4 instances..." -ForegroundColor Cyan
@@ -28,7 +28,7 @@ Write-Host @"
  ███████  ██████  ███████ ██     █████          ██    ██    ██ ██  ███  ██  ███  ██      █████   
       ██  ██      ██   ██ ██     ██             ██    ██    ██ ██   ██  ██   ██  ██      ██      
  ███████  ██      ██   ██  ██████ ███████       ██     ██████   ██████   ██████  ███████ ███████ 
-                                   V4.0.2 ADAPTIVE ENGINE
+                                   V4.0.3 ADAPTIVE ENGINE
 =========================================================================================================
 "@ -ForegroundColor Yellow
 
@@ -139,11 +139,21 @@ SmartLaunch(exeTarget, runCommand, webFallback := "") {
             resolved := PathCache.Has(runCommand) ? PathCache[runCommand] : ""
         }
     }
-    if (actualExe != "" && WinExist("ahk_exe " actualExe)) {
-        if WinActive("ahk_exe " actualExe) {
-            WinMinimize("ahk_exe " actualExe)
+    
+    ; Robust multi-platform window assessment mapping
+    isWhatsApp := (exeTarget = "WhatsApp.exe")
+    hasTargetWindow := WinExist("ahk_exe " actualExe) || (isWhatsApp && WinExist("WhatsApp"))
+    
+    if (actualExe != "" && hasTargetWindow) {
+        targetIdent := "ahk_exe " actualExe
+        if (isWhatsApp && !WinExist(targetIdent) && WinExist("WhatsApp")) {
+            targetIdent := "WhatsApp"
+        }
+        
+        if WinActive(targetIdent) {
+            WinMinimize(targetIdent)
         } else {
-            WinActivate("ahk_exe " actualExe)
+            WinActivate(targetIdent)
         }
         return
     }
@@ -297,12 +307,11 @@ y::OpenInBrowser("https://www.youtube.com")
 $footerBlock = @'
 #HotIf
 
-; --- FATIMA PROTOCOL FIX: NATIVE HARDWARE TRANSCEIVER ---
-*$Space:: {
-    if !KeyWait("Space", "T0.2") {
-        KeyWait("Space")
-        return
-    }
+; --- UPGRADED LAG-FREE TRANSCEIVER HOOK ---
+*Space:: {
+    ; Suppress default down event tracking to prioritize modifiers instantly
+}
+*Space up:: {
     if (A_PriorKey == "Space") {
         Send("{Space}")
     }
@@ -323,6 +332,6 @@ $Shortcut.WorkingDirectory = $installDir
 $Shortcut.IconLocation = "`"$ahkExe`", 0"
 $Shortcut.Save()
 
-Write-Host "Starting SpaceToggle OS V4.0.2..." -ForegroundColor Yellow
+Write-Host "Starting SpaceToggle OS V4.0.3..." -ForegroundColor Yellow
 Start-Process -FilePath $ahkExe -ArgumentList "`"$ahkScript`""
-Write-Host "SUCCESS! SpaceToggle OS V4.0.2 Adaptive Engine is active." -ForegroundColor Green
+Write-Host "SUCCESS! SpaceToggle OS V4.0.3 Adaptive Engine is active." -ForegroundColor Green

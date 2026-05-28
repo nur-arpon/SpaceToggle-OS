@@ -38,7 +38,7 @@ When deploying the **V4.0 Adaptive Engine**, you can dynamically toggle between 
 
 | Profile | Target Audience | Strategy Focus |
 | :--- | :--- | :--- |
-| **[F] Founders** | General / Developers | **Arpon's Personal Preference.** Standard, hyper-optimized setup tuned for pristine desktop navigation, rapid application context-switching, and deep developer multi-tasking. |
+| **[F] Founders** | General / Developers | **Arpon and Tawhid's Personal Preference.** Standard, hyper-optimized setup tuned for pristine desktop navigation, rapid application context-switching, and deep developer multi-tasking. |
 | **[G] Gamers** | Competitive Players | Activates a low-overhead hybrid runtime engine. Prioritizes local game detection (Apex Legends, Counter-Strike 2, Valorant, Fortnite) with seamless, zero-latency browser fallbacks. |
 | **[P] Professionals** | Enterprise / Creators | Hooks hotkeys directly to institutional workspace tools, production software, and business management links (Adobe Acrobat, Microsoft Excel, Outlook, Slack). |
 

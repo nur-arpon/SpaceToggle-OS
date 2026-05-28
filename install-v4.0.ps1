@@ -1,5 +1,5 @@
 # ==============================================================================
-# SpaceToggle OS (Universal Setup Script - V4.0.1 Adaptive Multi-Profile Core)
+# SpaceToggle OS (Universal Setup Script - V4.0.2 Adaptive Multi-Profile Core)
 # ==============================================================================
 
 Write-Host "Cleaning up old V4 instances..." -ForegroundColor Cyan
@@ -28,7 +28,7 @@ Write-Host @"
  ███████  ██████  ███████ ██     █████          ██    ██    ██ ██  ███  ██  ███  ██      █████   
       ██  ██      ██   ██ ██     ██             ██    ██    ██ ██   ██  ██   ██  ██      ██      
  ███████  ██      ██   ██  ██████ ███████       ██     ██████   ██████   ██████  ███████ ███████ 
-                                   V4.0.1 ADAPTIVE ENGINE
+                                   V4.0.2 ADAPTIVE ENGINE
 =========================================================================================================
 "@ -ForegroundColor Yellow
 
@@ -297,7 +297,16 @@ y::OpenInBrowser("https://www.youtube.com")
 $footerBlock = @'
 #HotIf
 
-~Space::Send("{Blind}{Space}{BS}")
+; --- FATIMA PROTOCOL FIX: NATIVE HARDWARE TRANSCEIVER ---
+*$Space:: {
+    if !KeyWait("Space", "T0.2") {
+        KeyWait("Space")
+        return
+    }
+    if (A_PriorKey == "Space") {
+        Send("{Space}")
+    }
+}
 '@
 
 # --- ATOMIC DISK WRITE ---
@@ -309,11 +318,11 @@ $WshShell = New-Object -ComObject WScript.Shell
 $StartupPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\SpaceToggleV4.lnk"
 $Shortcut = $WshShell.CreateShortcut($StartupPath)
 $Shortcut.TargetPath = $ahkExe
-$Shortcut.Arguments = "`"$ahkScript`""
+$Shortcut.Arguments = "`"" + $ahkScript + "`""
 $Shortcut.WorkingDirectory = $installDir
-$Shortcut.IconLocation = "`"$ahkExe`", 0"
+$Shortcut.IconLocation = "`"" + $ahkExe + "`", 0"
 $Shortcut.Save()
 
-Write-Host "Starting SpaceToggle OS V4.0.1..." -ForegroundColor Yellow
-Start-Process -FilePath $ahkExe -ArgumentList "`"$ahkScript`""
-Write-Host "SUCCESS! SpaceToggle OS V4.0.1 Adaptive Engine is active." -ForegroundColor Green
+Write-Host "Starting SpaceToggle OS V4.0.2..." -ForegroundColor Yellow
+Start-Process -FilePath $ahkExe -ArgumentList "`"" + $ahkScript + "`""
+Write-Host "SUCCESS! SpaceToggle OS V4.0.2 Adaptive Engine is active." -ForegroundColor Green

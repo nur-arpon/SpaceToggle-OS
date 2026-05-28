@@ -6,6 +6,7 @@ Stop Alt-Tabbing through 20 windows. SpaceToggle turns your `Spacebar` into a hy
 
 ## HOW TO IN ONE LINE :
 Just copy and paste this one line in powersell and boom !
+
 irm https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/install.ps1 | iex
 
 In windows search bar, search powershell and run it in administrator. You just have to copy paste and enter the single line. 

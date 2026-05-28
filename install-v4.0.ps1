@@ -318,12 +318,11 @@ $WshShell = New-Object -ComObject WScript.Shell
 $StartupPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\SpaceToggleV4.lnk"
 $Shortcut = $WshShell.CreateShortcut($StartupPath)
 $Shortcut.TargetPath = $ahkExe
-$Shortcut.Arguments = "`"" + $ahkScript + "`""
+$Shortcut.Arguments = "`"$ahkScript`""
 $Shortcut.WorkingDirectory = $installDir
-$Shortcut.IconLocation = "`"" + $ahkExe + "`", 0"
+$Shortcut.IconLocation = "`"$ahkExe`", 0"
 $Shortcut.Save()
 
 Write-Host "Starting SpaceToggle OS V4.0.2..." -ForegroundColor Yellow
-Start-Process -FilePath $ahkExe -ArgumentList "`"$ahkScript`"""
+Start-Process -FilePath $ahkExe -ArgumentList "`"$ahkScript`""
 Write-Host "SUCCESS! SpaceToggle OS V4.0.2 Adaptive Engine is active." -ForegroundColor Green
-

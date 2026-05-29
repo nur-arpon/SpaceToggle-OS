@@ -96,7 +96,7 @@ Esc``:: {
     ShowHUD("Workspace Secured")
 }
 
-``:: {
+SC029:: {
     global PiPState, SavedX, SavedY, SavedW, SavedH, SavedStyle, HotkeyPressed
     HotkeyPressed := true
     hwnd := WinExist("A")
@@ -316,6 +316,7 @@ if (Test-Path ".git") {
     git push origin main
 }
 Write-Host "✅ Deployment Completed Successfully!" -ForegroundColor Green
+
 
 
 

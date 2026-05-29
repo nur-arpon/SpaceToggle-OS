@@ -300,13 +300,13 @@ $WshShell = New-Object -ComObject WScript.Shell
 $StartupPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\SpaceToggleV9.lnk"
 $Shortcut = $WshShell.CreateShortcut($StartupPath)
 $Shortcut.TargetPath = $ahkExe
-$Shortcut.Arguments = "\"$ahkScript\""
+$Shortcut.Arguments = "`"$ahkScript`""
 $Shortcut.WorkingDirectory = $installDir
-$Shortcut.IconLocation = "\"$ahkExe\", 0"
+$Shortcut.IconLocation = "`"$ahkExe`", 0"
 $Shortcut.Save()
 
 Write-Host "⚡ Firing up SpaceToggle OS V9.2 Core Matrix..." -ForegroundColor Green
-Start-Process -FilePath $ahkExe -ArgumentList "\"$ahkScript\""
+Start-Process -FilePath $ahkExe -ArgumentList "`"$ahkScript`""
 
 if (Test-Path ".git") {
     Write-Host "📤 Step 4: Mirroring installation changes to GitHub Cloud..." -ForegroundColor Green
@@ -316,3 +316,4 @@ if (Test-Path ".git") {
     git push origin main
 }
 Write-Host "✅ Deployment Completed Successfully!" -ForegroundColor Green
+

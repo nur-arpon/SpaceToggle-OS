@@ -69,7 +69,9 @@ Global GuideTitleCtrl  := ""
 
 OnError(LogFault)
 LogFault(exception, mode) {
-    try FileAppend("Fault: " exception.Message " Line: " exception.Line "`n", EnvGet("LOCALAPPDATA") "\SpaceToggleOS\faultsV6.log")
+    try {
+        FileAppend("Fault: " exception.Message " Line: " exception.Line "`n", EnvGet("LOCALAPPDATA") "\SpaceToggleOS\faultsV6.log")
+    }
     return 1
 }
 
@@ -152,8 +154,11 @@ SmartLaunch(exeTarget, runCommand, webFallback := "") {
             return
         }
     }
-    try Run(runCommand) catch {
-        if (webFallback != "") Run(webFallback)
+    try {
+        Run(runCommand)
+    } catch {
+        if (webFallback != "")
+            Run(webFallback)
     }
 }
 

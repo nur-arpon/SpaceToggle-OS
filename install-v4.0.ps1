@@ -1,10 +1,12 @@
 # ==============================================================================
-# SpaceToggle OS (Universal Setup Script - V4.2.0 Automated Git Sync Edition)
+# SpaceToggle OS (Universal Setup Script - V4.2.1 Automated Git Sync Edition)
 # ==============================================================================
 
-# --- STEP 1: AUTOMATED TWO-WAY GIT PULL ---
-Write-Host "🔄 Step 1: Fetching latest cloud configurations from GitHub..." -ForegroundColor Cyan
-git pull origin main --rebase
+# --- STEP 1: AUTOMATED TWO-WAY GIT PULL (ENVIRONMENT AWARE) ---
+if (Test-Path ".git") {
+    Write-Host "🔄 Step 1: Fetching latest cloud configurations from GitHub..." -ForegroundColor Cyan
+    git pull origin main --rebase
+}
 
 # --- STEP 2: CLEANUP OLD INSTANCES ---
 Write-Host "⚙️ Step 2: Cleaning up old performance layers..." -ForegroundColor Cyan
@@ -34,7 +36,7 @@ Write-Host @"
  ███████  ██████  ███████ ██     █████          ██    ██    ██ ██  ███  ██  ███  ██      █████   
       ██  ██      ██   ██ ██     ██             ██    ██    ██ ██   ██  ██   ██  ██      ██      
  ███████  ██      ██   ██  ██████ ███████       ██     ██████   ██████   ██████  ███████ ███████ 
-                                   V4.2.0 AUTOMATED GIT ENGINE
+                                   V4.2.1 AUTOMATED GIT ENGINE
 =========================================================================================================
 "@ -ForegroundColor Yellow
 
@@ -151,7 +153,6 @@ SmartLaunch(exeTarget, runCommand, webFallback := "") {
         }
     }
     
-    ; Target mapping criteria to catch visible windows vs background host application frames
     targetIdent := "ahk_exe " actualExe
     if (exeTarget = "WhatsApp.exe") {
         if WinExist("WhatsApp ahk_class ApplicationFrameWindow") {
@@ -232,7 +233,6 @@ ToggleExplorer() {
 # --- MODULAR PROFILE BLOCKS ---
 $profileBlock = if ($result -eq 0) {
 @'
-; --- BUILD LAYER CONFIGURATION: FOUNDERS ---
 b::SmartLaunch("brave.exe", "brave.exe")
 c::SmartLaunch("chrome.exe", "chrome.exe")
 d::SmartLaunch("Discord.exe", "discord://", "https://discord.com/app")
@@ -262,7 +262,6 @@ y::OpenInBrowser("https://www.youtube.com")
 '@
 } elseif ($result -eq 1) {
 @'
-; --- BUILD LAYER CONFIGURATION: GAMERS (MORPHIC DUAL-HYBRID SUB-SYSTEM) ---
 a::(PathCache["r5apex.exe"] != "") ? SmartLaunch("r5apex.exe", "r5apex.exe") : OpenInBrowser("https://gemini.google.com")
 b::SmartLaunch("brave.exe", "brave.exe")
 c::(PathCache["cs2.exe"] != "") ? SmartLaunch("cs2.exe", "cs2.exe") : SmartLaunch("chrome.exe", "chrome.exe")
@@ -291,7 +290,6 @@ y::OpenInBrowser("https://www.youtube.com/gaming")
 '@
 } else {
 @'
-; --- BUILD LAYER CONFIGURATION: PROFESSIONALS ---
 a::SmartLaunch("Acrobat.exe", "Acrobat.exe")
 b::SmartLaunch("brave.exe", "brave.exe")
 c::OpenInBrowser("https://calendar.google.com")
@@ -349,14 +347,17 @@ $Shortcut.WorkingDirectory = $installDir
 $Shortcut.IconLocation = "`"$ahkExe`", 0"
 $Shortcut.Save()
 
-Write-Host "Starting SpaceToggle OS V4.2.0..." -ForegroundColor Yellow
+Write-Host "Starting SpaceToggle OS V4.2.1..." -ForegroundColor Yellow
 Start-Process -FilePath $ahkExe -ArgumentList "`"$ahkScript`""
-Write-Host "SUCCESS! SpaceToggle OS V4.2.0 Automated Git Sync Engine is active." -ForegroundColor Green
 
-# --- STEP 4: AUTOMATED TWO-WAY GIT PUSH ---
-Write-Host "📤 Step 4: Automatically pushing your changes back to GitHub cloud..." -ForegroundColor Green
-$CurrentTimestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-git add .
-git commit -m "Auto-Sync Engine Build V4.2.0: $CurrentTimestamp"
-git push origin main
-Write-Host "✅ SUCCESS! Configurations perfectly mirrored to GitHub." -ForegroundColor Green
+# --- STEP 4: AUTOMATED TWO-WAY GIT PUSH (ENVIRONMENT AWARE) ---
+if (Test-Path ".git") {
+    Write-Host "📤 Step 4: Automatically pushing your changes back to GitHub cloud..." -ForegroundColor Green
+    $CurrentTimestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    git add .
+    git commit -m "Auto-Sync Engine Build V4.2.1: $CurrentTimestamp"
+    git push origin main
+    Write-Host "✅ SUCCESS! SpaceToggle OS V4.2.1 is active and perfectly mirrored to GitHub." -ForegroundColor Green
+} else {
+    Write-Host "✅ SUCCESS! SpaceToggle OS V4.2.1 is active. (Skipped Git Sync: standard user environment detected)" -ForegroundColor Green
+}

@@ -1,8 +1,13 @@
 # ==============================================================================
-# SpaceToggle OS (Universal Setup Script - V4.0.4 Precision Core)
+# SpaceToggle OS (Universal Setup Script - V4.2.0 Automated Git Sync Edition)
 # ==============================================================================
 
-Write-Host "Cleaning up old V4 instances..." -ForegroundColor Cyan
+# --- STEP 1: AUTOMATED TWO-WAY GIT PULL ---
+Write-Host "🔄 Step 1: Fetching latest cloud configurations from GitHub..." -ForegroundColor Cyan
+git pull origin main --rebase
+
+# --- STEP 2: CLEANUP OLD INSTANCES ---
+Write-Host "⚙️ Step 2: Cleaning up old performance layers..." -ForegroundColor Cyan
 Stop-Process -Name "AutoHotkey64" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
 Start-Sleep -Seconds 1
 
@@ -12,7 +17,8 @@ $ahkExe = "$installDir\AutoHotkey64.exe"
 $ahkScript = "$installDir\SpaceToggleV4.ahk"
 $zipFile = "$installDir\ahk.zip"
 
-Write-Host "Verifying AutoHotkey Engine..." -ForegroundColor Yellow
+# --- STEP 3: VERIFY AND MONITOR ENGINE DEPLOYMENT ---
+Write-Host "Verifying AutoHotkey Engine Runtime..." -ForegroundColor Yellow
 $zipUrl = "https://github.com/AutoHotkey/AutoHotkey/releases/download/v2.0.18/AutoHotkey_2.0.18.zip"
 if (!(Test-Path $ahkExe)) {
     Invoke-WebRequest -Uri $zipUrl -OutFile $zipFile
@@ -28,7 +34,7 @@ Write-Host @"
  ███████  ██████  ███████ ██     █████          ██    ██    ██ ██  ███  ██  ███  ██      █████   
       ██  ██      ██   ██ ██     ██             ██    ██    ██ ██   ██  ██   ██  ██      ██      
  ███████  ██      ██   ██  ██████ ███████       ██     ██████   ██████   ██████  ███████ ███████ 
-                                   V4.0.4 PRECISION ENGINE
+                                   V4.2.0 AUTOMATED GIT ENGINE
 =========================================================================================================
 "@ -ForegroundColor Yellow
 
@@ -343,6 +349,14 @@ $Shortcut.WorkingDirectory = $installDir
 $Shortcut.IconLocation = "`"$ahkExe`", 0"
 $Shortcut.Save()
 
-Write-Host "Starting SpaceToggle OS V4.0.4..." -ForegroundColor Yellow
+Write-Host "Starting SpaceToggle OS V4.2.0..." -ForegroundColor Yellow
 Start-Process -FilePath $ahkExe -ArgumentList "`"$ahkScript`""
-Write-Host "SUCCESS! SpaceToggle OS V4.0.4 Precision Engine is active." -ForegroundColor Green
+Write-Host "SUCCESS! SpaceToggle OS V4.2.0 Automated Git Sync Engine is active." -ForegroundColor Green
+
+# --- STEP 4: AUTOMATED TWO-WAY GIT PUSH ---
+Write-Host "📤 Step 4: Automatically pushing your changes back to GitHub cloud..." -ForegroundColor Green
+$CurrentTimestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+git add .
+git commit -m "Auto-Sync Engine Build V4.2.0: $CurrentTimestamp"
+git push origin main
+Write-Host "✅ SUCCESS! Configurations perfectly mirrored to GitHub." -ForegroundColor Green

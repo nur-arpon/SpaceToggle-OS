@@ -12,13 +12,13 @@ We offer two operational deployment paths depending on your workflow requirement
 
 ### 🚀 Option 1: The Standard Edition (Base Version)
 *Best for users who want a simple, bulletproof, "set-and-forget" workspace mapping loop.*
-```powershell
+``` powershell
 irm [https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/install.ps1](https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/install.ps1) | iex
 ```
 
-### ⚡ Option 2: The Adaptive Engine (Version 4.0)
+### ⚡ Option 2: The Adaptive Git Engine (Version 4.2.0)
 *Best for power users who want specialized workflow optimization layers. Running this deployment unlocks an interactive terminal prompt to choose your exact runtime profile.*
-```powershell
+``` powershell
 irm [https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/install-v4.0.ps1](https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/install-v4.0.ps1) | iex
 ```
 
@@ -32,9 +32,9 @@ irm [https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/install-v4.
 
 ---
 
-## 📊 Version 4.0 Adaptive Profile Matrix
+## 📊 Version 4.2.0 Adaptive Profile Matrix
 
-When deploying the **V4.0 Adaptive Engine**, you can dynamically toggle between three specialized operational strategies on launch:
+When deploying the **V4.2.0 Adaptive Engine**, you can dynamically toggle between three specialized operational strategies on launch:
 
 | Profile | Target Audience | Strategy Focus |
 | :--- | :--- | :--- |

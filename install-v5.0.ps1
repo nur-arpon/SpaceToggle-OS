@@ -57,7 +57,7 @@ OnError(LogFault)
 LogFault(exception, mode) {
     try {
         localAppData := EnvGet("LOCALAPPDATA")
-        FileAppend("Fault detected: " exception.Message " in " exception.What " at line " exception.Line ``n", localAppData "\SpaceToggleOS\faultsV5.log")
+        FileAppend("Fault detected: " exception.Message " in " exception.What " at line " exception.Line "``n", localAppData "\SpaceToggleOS\faultsV5.log")
     }
     return 1
 }
@@ -384,6 +384,6 @@ Write-Host "✅ SUCCESS! SpaceToggle OS V5.0.0 Ultimate Engine is active." -Fore
 Write-Host "📤 Step 4: Automatically pushing your changes back to GitHub cloud..." -ForegroundColor Green
 $CurrentTimestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 git add .
-git commit -m "Auto-Sync Engine Build V5.0.0 Ultimate: $CurrentTimestamp"
+git commit -m "Auto-Sync Engine Build V5.0.1 Ultimate (Hotfix): $CurrentTimestamp"
 git push origin main
 Write-Host "✅ SUCCESS! Configurations perfectly mirrored to GitHub." -ForegroundColor Green

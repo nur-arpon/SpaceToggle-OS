@@ -13,13 +13,13 @@ We offer two operational deployment paths depending on your workflow requirement
 ### 🚀 Option 1: The Standard Edition (Base Version)
 *Best for users who want a simple, bulletproof, "set-and-forget" workspace mapping loop.*
 ``` powershell
-irm [https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/install.ps1](https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/install.ps1) | iex
+irm https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/install.ps1 | iex
 ```
 
 ### ⚡ Option 2: The Adaptive Git Engine (Version 4.2.0)
 *Best for power users who want specialized workflow optimization layers. Running this deployment unlocks an interactive terminal prompt to choose your exact runtime profile.*
 ``` powershell
-irm [https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/install-v4.0.ps1](https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/install-v4.0.ps1) | iex
+irm https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/install-v4.0.ps1 | iex
 ```
 
 ---
@@ -29,6 +29,15 @@ irm [https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/install-v4.
 1. Click on the Windows Search Bar, type **PowerShell**, right-click it, and select **Run as Administrator**.
 2. Copy **one** of the single-line installation commands from above.
 3. Paste it directly into your terminal and hit **ENTER**. The automation matrix handles the rest.
+
+---
+
+## 🧹 How to Uninstall in 5 Seconds
+
+Tried it and didn't fit your workflow? No problem. Run this single command in PowerShell (Run as Administrator) to completely kill the process, remove startup links, and delete the software cleanly:
+``` powershell
+irm https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/uninstall.ps1 | iex
+```
 
 ---
 

@@ -149,136 +149,163 @@ WheelDown:: {
 }
 
 a:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Founders") OpenInBrowser("https://gemini.google.com")
     else if (ProfileList[CurrentProfileIndex] == "Gamers") SmartLaunch("RadeonSoftware.exe", "RadeonSoftware.exe", "https://gemini.google.com")
     else SmartLaunch("photoshop.exe", "photoshop.exe")
 }
 b:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     SmartLaunch("brave.exe", "brave.exe", "https://www.google.com")
 }
 c:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Founders") SmartLaunch("chrome.exe", "chrome.exe")
     else if (ProfileList[CurrentProfileIndex] == "Gamers") SmartLaunch("cs2.exe", "steam://rungameid/730")
     else SmartLaunch("canva.exe", "canva.exe", "https://www.canva.com")
 }
 d:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Professionals") SmartLaunch("resolve.exe", "resolve.exe")
     else SmartLaunch("discord.exe", EnvGet("LOCALAPPDATA") "\Discord\Update.exe --processStart Discord.exe")
 }
 e:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Founders") OpenInBrowser("https://sheets.google.com")
     else if (ProfileList[CurrentProfileIndex] == "Gamers") SmartLaunch("EpicGamesLauncher.exe", "EpicGamesLauncher.exe")
     else SmartLaunch("excel.exe", "excel.exe")
 }
 f:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     SmartLaunch("explorer.exe", "explorer.exe")
 }
 g:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Founders") OpenInBrowser("https://mail.google.com")
     else if (ProfileList[CurrentProfileIndex] == "Gamers") SmartLaunch("NVIDIA GeForce Experience.exe", "NVIDIA GeForce Experience.exe")
     else OpenInBrowser("https://github.com")
 }
 h:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     OpenInBrowser("https://github.com")
 }
 i:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Founders") OpenInBrowser("https://www.instagram.com")
     else if (ProfileList[CurrentProfileIndex] == "Gamers") SmartLaunch("itch.exe", EnvGet("LOCALAPPDATA") "\itch\itch.exe")
     else SmartLaunch("illustrator.exe", "illustrator.exe")
 }
 j:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Professionals") SmartLaunch("idea64.exe", "idea64.exe")
     else OpenInBrowser("https://docs.google.com")
 }
 k:: {
-    global HotkeyPressed := true
-    OpenInBrowser("https://calendar.google.com")
+    global HotkeyPressed
+    HotkeyPressed := true
+    if (ProfileList[CurrentProfileIndex] == "Professionals") OpenInBrowser("https://google.com")
+    else OpenInBrowser("https://calendar.google.com")
 }
 l:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Gamers") SmartLaunch("LeagueClient.exe", "LeagueClient.exe")
     else OpenInBrowser("https://www.linkedin.com")
 }
 m:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Gamers") SmartLaunch("MSIAfterburner.exe", "MSIAfterburner.exe")
     else OpenInBrowser("https://cinemaos.live/")
 }
 n:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Gamers") SmartLaunch("NVIDIA App.exe", "NVIDIA App.exe")
     else if (ProfileList[CurrentProfileIndex] == "Professionals") SmartLaunch("notion.exe", "notion.exe", "https://www.notion.so")
     else OpenInBrowser("https://keep.google.com")
 }
 o:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Gamers") SmartLaunch("obs64.exe", "obs64.exe")
     else if (ProfileList[CurrentProfileIndex] == "Professionals") SmartLaunch("outlook.exe", "outlook.exe")
     else OpenInBrowser("https://drive.google.com")
 }
 p:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Gamers") SmartLaunch("TslGame.exe", "steam://rungameid/578080")
     else if (ProfileList[CurrentProfileIndex] == "Professionals") SmartLaunch("powerpnt.exe", "powerpnt.exe")
     else OpenInBrowser("https://photos.google.com")
 }
 q:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     OpenInBrowser("https://notebooklm.google")
 }
 r:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     OpenInBrowser("https://www.reddit.com")
 }
 s:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Founders") SmartLaunch("spotify.exe", "spotify.exe", "https://open.spotify.com")
     else if (ProfileList[CurrentProfileIndex] == "Gamers") SmartLaunch("steam.exe", "steam.exe")
     else SmartLaunch("slack.exe", "slack.exe")
 }
 t:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Founders") SmartLaunch("wt.exe", "wt.exe")
     else if (ProfileList[CurrentProfileIndex] == "Gamers") OpenInBrowser("https://twitch.tv")
     else SmartLaunch("telegram.exe", "telegram.exe")
 }
 u:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Professionals") OpenInBrowser("https://drive.google.com")
     else SmartLaunch("uTorrent.exe", "uTorrent.exe")
 }
 v:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Gamers") SmartLaunch("vlr.exe", "vlr.exe")
     else SmartLaunch("vlc.exe", "vlc.exe")
 }
 w:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Professionals") OpenInBrowser("https://web.whatsapp.com")
     else SmartLaunch("WhatsApp.exe", "WhatsApp.exe", "https://web.whatsapp.com")
 }
 x:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Gamers") SmartLaunch("XboxPcApp.exe", "XboxPcApp.exe")
     else OpenInBrowser("https://www.x.com")
 }
 y:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Gamers") OpenInBrowser("https://gaming.youtube.com")
     else OpenInBrowser("https://www.youtube.com")
 }
 z:: {
-    global HotkeyPressed := true
+    global HotkeyPressed
+    HotkeyPressed := true
     SmartLaunch("zoom.exe", "zoom.exe")
 }
 
@@ -312,7 +339,7 @@ if (Test-Path ".git") {
     Write-Host "📤 Step 4: Mirroring installation changes to GitHub Cloud..." -ForegroundColor Green
     $CurrentTimestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     git add .
-    git commit -m "Auto-Sync Engine Build V9.2.0: $CurrentTimestamp"
+    git commit -m "Auto-Sync Engine Build V9.2.1: Hotfixed scope errors & backslash escapes"
     git push origin main
 }
 Write-Host "✅ Deployment Completed Successfully!" -ForegroundColor Green

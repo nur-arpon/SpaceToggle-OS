@@ -1,25 +1,17 @@
 # ==============================================================================
-# SpaceToggle OS (Universal Setup Script - V9.2 Core Matrix Core)
+# SpaceToggle OS (Universal Setup Script - V9.2.3 Core Matrix)
 # ==============================================================================
-
-Write-Host "🔄 Step 1: Silently syncing repository..." -ForegroundColor Cyan
-if (Test-Path ".git") {
-    git add . 2>$null
-    git commit -m "Auto-Commit before sync" 2>$null
-    git pull origin main --rebase 2>$null
-}
-
-Write-Host "⚙️ Step 2: Terminating old instances..." -ForegroundColor Cyan
-Stop-Process -Name "AutoHotkey64" -ErrorAction SilentlyContinue
-Start-Sleep -Seconds 1
-
 $installDir = "$env:LOCALAPPDATA\SpaceToggleOS"
 if (!(Test-Path $installDir)) { New-Item -ItemType Directory -Force -Path $installDir | Out-Null }
 $ahkExe = "$installDir\AutoHotkey64.exe"
 $ahkScript = "$installDir\SpaceToggleV9.ahk"
 $zipFile = "$installDir\ahk.zip"
 
-Write-Host "📦 Step 3: Verifying AutoHotkey Engine..." -ForegroundColor Yellow
+Write-Host "⚙️ Terminating legacy instances..." -ForegroundColor Cyan
+Stop-Process -Name "AutoHotkey64" -ErrorAction SilentlyContinue
+Start-Sleep -Seconds 1
+
+Write-Host "📦 Verifying AutoHotkey Engine..." -ForegroundColor Yellow
 $zipUrl = "https://github.com/AutoHotkey/AutoHotkey/releases/download/v2.0.18/AutoHotkey_2.0.18.zip"
 if (!(Test-Path $ahkExe)) {
     Invoke-WebRequest -Uri $zipUrl -OutFile $zipFile
@@ -27,7 +19,7 @@ if (!(Test-Path $ahkExe)) {
     Remove-Item -Path $zipFile -Force
 }
 
-Write-Host "🧠 Step 4: Generating FULL Feature AHK Core Matrix..." -ForegroundColor Magenta
+Write-Host "🧠 Compiling Error-Free Core Matrix..." -ForegroundColor Magenta
 $scriptContent = @'
 #Requires AutoHotkey v2.0
 SetTitleMatchMode 2
@@ -86,8 +78,7 @@ OpenInBrowser(url) {
     }
 }
 
-#HotIf HookSpace()
-HookSpace() => GetKeyState("Space", "P")
+#HotIf GetKeyState("Space", "P")
 
 RAlt:: {
     global CurrentProfileIndex, ProfileList, HotkeyPressed
@@ -103,7 +94,7 @@ Esc:: {
     ShowHUD("Workspace Secured")
 }
 
-`:: {
+vkC0:: {
     global PiPState, SavedX, SavedY, SavedW, SavedH, SavedStyle, HotkeyPressed
     HotkeyPressed := true
     hwnd := WinExist("A")
@@ -384,18 +375,20 @@ z:: {
 
 #HotIf
 
-~Space Up:: {
+~*Space:: {
+    global HotkeyPressed := false
+}
+
+~*Space up:: {
     global HotkeyPressed
-    if (!HotkeyPressed) {
-        Send("{Space}")
+    if (HotkeyPressed) {
+        Send("{Blind}{BS}")
     }
-    HotkeyPressed := false
 }
 '@
-
 $scriptContent | Set-Content -Path $ahkScript -Encoding UTF8 -Force
 
-Write-Host "⚙️ Step 5: Registering Startup Sequence..." -ForegroundColor Yellow
+Write-Host "⚙️ Registering Startup Sequence..." -ForegroundColor Yellow
 $WshShell = New-Object -ComObject WScript.Shell
 $StartupPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\SpaceToggleV9.lnk"
 $Shortcut = $WshShell.CreateShortcut($StartupPath)
@@ -405,5 +398,6 @@ $Shortcut.WorkingDirectory = $installDir
 $Shortcut.IconLocation = "`"$ahkExe`", 0"
 $Shortcut.Save()
 
-Write-Host "⚡ Step 6: Booting Engine..." -ForegroundColor Green
+Write-Host "⚡ Booting Engine..." -ForegroundColor Green
 Start-Process -FilePath $ahkExe -ArgumentList "`"$ahkScript`""
+Write-Host "✅ Installation Complete! SpaceToggle V9.2.3 is Active." -ForegroundColor Green

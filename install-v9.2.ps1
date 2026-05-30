@@ -2,13 +2,15 @@
 # SpaceToggle OS (Universal Setup Script - V9.2 Core Matrix Core)
 # ==============================================================================
 
+Write-Host "🔄 Step 1: Silently syncing repository..." -ForegroundColor Cyan
 if (Test-Path ".git") {
-    Write-Host "🔄 Step 1: Fetching latest cloud configurations from GitHub..." -ForegroundColor Cyan
-    git pull origin main --rebase
+    git add . 2>$null
+    git commit -m "Auto-Commit before sync" 2>$null
+    git pull origin main --rebase 2>$null
 }
 
-Write-Host "⚙️ Step 2: Cleaning up old performance layers..." -ForegroundColor Cyan
-Stop-Process -Name "AutoHotkey64" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+Write-Host "⚙️ Step 2: Terminating old instances..." -ForegroundColor Cyan
+Stop-Process -Name "AutoHotkey64" -ErrorAction SilentlyContinue
 Start-Sleep -Seconds 1
 
 $installDir = "$env:LOCALAPPDATA\SpaceToggleOS"
@@ -17,7 +19,7 @@ $ahkExe = "$installDir\AutoHotkey64.exe"
 $ahkScript = "$installDir\SpaceToggleV9.ahk"
 $zipFile = "$installDir\ahk.zip"
 
-Write-Host "📦 Step 3: Verifying AutoHotkey Engine Runtime Core..." -ForegroundColor Yellow
+Write-Host "📦 Step 3: Verifying AutoHotkey Engine..." -ForegroundColor Yellow
 $zipUrl = "https://github.com/AutoHotkey/AutoHotkey/releases/download/v2.0.18/AutoHotkey_2.0.18.zip"
 if (!(Test-Path $ahkExe)) {
     Invoke-WebRequest -Uri $zipUrl -OutFile $zipFile
@@ -25,6 +27,7 @@ if (!(Test-Path $ahkExe)) {
     Remove-Item -Path $zipFile -Force
 }
 
+Write-Host "🧠 Step 4: Generating FULL Feature AHK Core Matrix..." -ForegroundColor Magenta
 $scriptContent = @'
 #Requires AutoHotkey v2.0
 SetTitleMatchMode 2
@@ -75,7 +78,11 @@ OpenInBrowser(url) {
         WinActivate("ahk_exe chrome.exe")
         Run(url)
     } else {
-        Run(url)
+        try {
+            Run("brave.exe " url)
+        } catch {
+            Run(url)
+        }
     }
 }
 
@@ -101,7 +108,7 @@ Esc:: {
     HotkeyPressed := true
     hwnd := WinExist("A")
     if !hwnd return
-    
+
     if (PiPState == 0) {
         WinGetPos(&SavedX, &SavedY, &SavedW, &SavedH, hwnd)
         SavedStyle := WinGetStyle(hwnd)
@@ -239,11 +246,7 @@ j:: {
 k:: {
     global HotkeyPressed
     HotkeyPressed := true
-    if (ProfileList[CurrentProfileIndex] == "Professionals") {
-        OpenInBrowser("https://google.com")
-    } else {
-        OpenInBrowser("https://calendar.google.com")
-    }
+    OpenInBrowser("https://calendar.google.com")
 }
 l:: {
     global HotkeyPressed
@@ -321,7 +324,7 @@ t:: {
     global HotkeyPressed
     HotkeyPressed := true
     if (ProfileList[CurrentProfileIndex] == "Founders") {
-        SmartLaunch("wt.exe", "wt.exe")
+        SmartLaunch("pwsh.exe", "pwsh.exe")
     } else if (ProfileList[CurrentProfileIndex] == "Gamers") {
         OpenInBrowser("https://twitch.tv")
     } else {
@@ -392,7 +395,7 @@ z:: {
 
 $scriptContent | Set-Content -Path $ahkScript -Encoding UTF8 -Force
 
-Write-Host "⚙️ Registering Window Manager to Startup Sequence..." -ForegroundColor Yellow
+Write-Host "⚙️ Step 5: Registering Startup Sequence..." -ForegroundColor Yellow
 $WshShell = New-Object -ComObject WScript.Shell
 $StartupPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\SpaceToggleV9.lnk"
 $Shortcut = $WshShell.CreateShortcut($StartupPath)
@@ -402,14 +405,5 @@ $Shortcut.WorkingDirectory = $installDir
 $Shortcut.IconLocation = "`"$ahkExe`", 0"
 $Shortcut.Save()
 
-Write-Host "⚡ Firing up SpaceToggle OS V9.2 Core Matrix..." -ForegroundColor Green
+Write-Host "⚡ Step 6: Booting Engine..." -ForegroundColor Green
 Start-Process -FilePath $ahkExe -ArgumentList "`"$ahkScript`""
-
-if (Test-Path ".git") {
-    Write-Host "📤 Step 4: Mirroring installation changes to GitHub Cloud..." -ForegroundColor Green
-    $CurrentTimestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-    git add .
-    git commit -m "Auto-Sync Engine Build V9.2.2: Structural brace and conditional fixes"
-    git push origin main
-}
-Write-Host "✅ Deployment Completed Successfully!" -ForegroundColor Green

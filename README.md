@@ -76,8 +76,6 @@ Hold your **` Spacebar `** down and press any of the following keys to trigger a
 | **Y** | YouTube | YouTube Gaming | YouTube |
 | **Z** | Zoom Video | *Unmapped Fallback* | *Unmapped Fallback* |
 
-*Note: If an unmapped application hotkey is pressed inside the **Gamers** or **Professionals** layer, the engine automatically triggers a safety cascade to run the default **Founders** target program or website.*
-
 ---
 
 ## 📊 Profile Focus Matrix
@@ -92,11 +90,11 @@ Hold your **` Spacebar `** down and press any of the following keys to trigger a
 
 ## ✨ V9.2 Architectural Features
 
-* **Visual Style Bitmasking (``` 0x10000000 ```):** Bypasses ghost processes and unrendered thread handles common in modern frameworks like Electron or Chromium. The routing matrix scans the OS window list and maps commands exclusively to visible user canvases.
+* **Visual Style Bitmasking (0x10000000):** Bypasses ghost processes and unrendered thread handles common in modern frameworks like Electron or Chromium. The routing matrix scans the OS window list and maps commands exclusively to visible user canvases.
 * **Deterministic Geometry Resolvers:** The multi-monitor tracking engine targets center-point window intersections, eliminating scaling clipping issues caused by maximized windows crossing digital monitor bounds.
 * **Real-Time Telemetry HUD:** Dynamically inspects active application titles on execution, sanitizing and gracefully truncating long layout names to maintain an aesthetic, overflow-protected desktop HUD.
-* **Liquid Glass UI Composition:** Integrates directly with Windows Desktop Window Manager (``` dwmapi.dll ```) to apply dark-mode window attributes and immersive glass headers to custom control modules.
-* **Zero Disk I/O Path Caching:** Leverages deeply structured registry parsing loops (``` HKLM ``` and ``` HKCU ``` App Paths) alongside local system variable profiling on engine initialization for instant binary execution.
+* **Liquid Glass UI Composition:** Integrates directly with Windows Desktop Window Manager (dwmapi.dll) to apply dark-mode window attributes and immersive glass headers to custom control modules.
+* **Zero Disk I/O Path Caching:** Leverages deeply structured registry parsing loops (HKLM and HKCU App Paths) alongside local system variable profiling on engine initialization for instant binary execution.
 
 ---
 

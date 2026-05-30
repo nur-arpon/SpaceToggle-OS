@@ -1,19 +1,19 @@
-# SpaceToggle OS 🚀 — V9.2 Core Matrix
+# SpaceToggle OS 🚀 — V11.0 Core Matrix
 
 > **SPACE + INITIAL of your desired app = BOOM! It opens. Press the same combination again... BOOM! It closes.**
 
 SpaceToggle OS is a lightning-fast, minimalist window manager for Windows, powered by the high-performance AutoHotkey v2 runtime layer. SpaceToggle transforms your ordinary Spacebar into an intelligent hyper-modifier. Hold Spacebar and tap a letter to instantly summon or banish your most-used applications in zero milliseconds.
 
-Version 9.2 introduces a visual window layout state-machine that completely reimagines background thread handling, active HUD telemetry, fluid picture-in-picture workspaces, and advanced privacy masking.
+Version 11 introduces a visual window layout state-machine that completely reimagines background thread handling, active HUD telemetry, fluid picture-in-picture workspaces, and advanced privacy masking.
 
 ---
 
-## 🚀 The Core Matrix (V9.2) One-Liner
+## 🚀 The Core Matrix (V11.0) One-Liner
 
 We have unified all operational profiles into a single, automated, hardware-adaptive deployment engine. This single command checks your system architecture, terminates legacy performance loops, deploys the visual engine layers, and hooks native system startup pipelines.
 
 ``` powershell
-irm https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/install-v9.2.ps1 | iex
+irm https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/install-v11.ps1 | iex
 ```
 
 ---
@@ -28,7 +28,7 @@ irm https://raw.githubusercontent.com/nur-arpon/SpaceToggle-OS/main/install-v9.2
 
 ## 🔄 Core Navigation & System Layer Modifiers
 
-No more re-running installers to change layouts. The V9.2 framework manages three independent workspace layers simultaneously and introduces global HUD window management modifiers.
+No more re-running installers to change layouts. The V11.0 framework manages three independent workspace layers simultaneously and introduces global HUD window management modifiers.
 
 ### 👤 Profile Rotation
 * **To Cycle Profiles:** Hold **` Space `** and tap **` Right Alt `**.

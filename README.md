@@ -90,7 +90,7 @@ Hold your **` Spacebar `** down and press any of the following keys to trigger a
 
 ---
 
-## ✨ V9.2 Architectural Features
+## ✨ V11.0 Architectural Features
 
 * **Visual Style Bitmasking (``` 0x10000000 ```):** Bypasses ghost processes and unrendered thread handles common in modern frameworks like Electron or Chromium. The routing matrix scans the OS window list and maps commands exclusively to visible user canvases.
 * **Deterministic Geometry Resolvers:** The multi-monitor tracking engine targets center-point window intersections, eliminating scaling clipping issues caused by maximized windows crossing digital monitor bounds.

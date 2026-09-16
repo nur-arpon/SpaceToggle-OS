@@ -1,21 +1,72 @@
-MIT License
+SpaceToggle OS Source-Available Licence
+Copyright (c) 2026 Nur Ifran Arpon. All rights reserved.
 
-Copyright (c) 2026 Nur Ifran Arpon 
+SpaceToggle OS is the AutoHotkey-era predecessor of Spaceadom
+(https://github.com/nur-arpon/Spaceadom). It shares Spaceadom's idea and its
+author, and from 17 September 2026 it is published under the same terms as
+Spaceadom.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This is NOT an open-source licence. It is not one of the licences approved by
+the Open Source Initiative, and it does not give you the rights that "open
+source" usually implies (no right to redistribute, no right to sell, no right
+to build a competing product on top of it). It is a source-available licence:
+the code is public so you can read it, learn from it, run it yourself, and
+verify what it does — nothing more.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+0. History — read this first
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+   Commits of this repository published BEFORE 17 September 2026 were released
+   under the MIT License, and that grant cannot be withdrawn: anyone who
+   obtained those versions under MIT keeps the MIT rights to THOSE versions.
+   This licence governs the repository from this commit onward — every change
+   made from here, and the project as it is published from here.
+
+1. What you may do
+
+   - Read the source code.
+   - Run the scripts and installers for your own personal, non-commercial use,
+     or to evaluate them.
+   - Fork or clone the repository to study it, keeping this licence intact.
+
+2. What you may not do
+
+   - Redistribute the source code, or anything built from it, to anyone else —
+     publicly or privately, modified or unmodified, free or paid.
+   - Sell the software, or any modified version of it, or bundle it into a
+     product or service that you sell or otherwise monetise.
+   - Publish a derivative product based on this code — a fork positioned as
+     its own app, a "clone", or a rebrand.
+   - Remove or alter any copyright, licence, or attribution notice.
+   - Use Nur Ifran Arpon's name, "SpaceToggle", "Spaceadom", or any of the
+     project's branding to imply endorsement of your own build or fork.
+
+3. Official builds
+
+   The only builds you should trust as "the real thing" are the ones the owner
+   publishes himself, on this repository and on Spaceadom's. A build from
+   anywhere else is not an official build, and distributing it as if it were
+   one is exactly what Section 2 forbids.
+
+4. Third-party components
+
+   SpaceToggle OS is built on AutoHotkey and other open-source software, each
+   of which keeps its own licence, unmodified by anything in this document.
+
+5. Contributions
+
+   If you submit a change to this project, you agree that your contribution is
+   licensed to the project under the terms of this licence.
+
+6. No warranty
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM THE
+   SOFTWARE OR THE USE OF IT, HOWEVER CAUSED.
+
+7. Questions
+
+   If you want to do something with this code that isn't covered above, open
+   an issue or contact the owner through GitHub. Permission is the owner's to
+   give and is not implied by anything else in this document.

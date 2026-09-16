@@ -1,4 +1,6 @@
-﻿# SpaceToggle OS 🚀 — V11.0 Core Matrix
+# SpaceToggle OS 🚀 — V11.0 Core Matrix
+
+*Source-visible, proprietary — see [LICENSE](LICENSE). This is the AutoHotkey-era predecessor of [Spaceadom](https://github.com/nur-arpon/Spaceadom), where the idea lives on as a native Windows app. Versions published before 17 September 2026 remain under MIT; everything from that date is under the new licence.*
 
 > **SPACE + INITIAL of your desired app = BOOM! It opens. Press the same combination again... BOOM! It closes.**
 
